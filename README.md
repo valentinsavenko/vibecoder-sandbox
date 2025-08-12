@@ -4,25 +4,25 @@ TMUX is used to manage multiple LLMs in a single session. Each LLM-cli is runnin
 
 TMUX is very unintuitive and if you're not familiar with it this will hurt :) 
 
-# this is playground, don't use it in production
+## this is playground, don't use it in production
 these ssh keys are publicly available and insecure for any production use now
 
-# prepare env vars
+## prepare env vars
 ```bash
 cp .env_TEMPLATE .env # change file and add your api keys
 ```
 
-# starting the containers
+## starting the containers
 ```bash
 docker-compose up -d
 ```
 
-# stopping the containers
+## stopping the containers
 ```bash
 docker-compose down
 ```
 
-# starting the tmux session
+## starting the tmux session
 ```bash
-docker-compose exec vibecoder ./app/start_vibing_tmux.sh
+docker-compose exec vibecoder /app/start_vibing_tmux.sh
 ```

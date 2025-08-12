@@ -1,9 +1,17 @@
 FROM node:22
-RUN apt-get update && apt-get install -y openssh-server
+RUN apt-get update && apt-get install -y openssh-server \ 
+    tmux \ 
+    curl \
+    vim \
+    net-tools \
+    traceroute \
+    dnsutils \
+    netcat-traditional \
+    iputils-ping
 
-RUN npm config set prefix /home/node/.npm-global
-ENV PATH=/home/node/.npm-global/bin:$PATH
-RUN npm install -g @vibe-kit/grok-cli@latest @google/gemini-cli@latest @anthropic-ai/claude-code@latest
+RUN npm config set prefix /root/.npm-global
+ENV PATH=/root/.npm-global/bin:$PATH
+RUN npm install -g @qwen-code/qwen-code@latest @vibe-kit/grok-cli@latest @google/gemini-cli@latest @anthropic-ai/claude-code@latest
 
 RUN mkdir /var/run/sshd
 RUN echo 'root:password' | chpasswd

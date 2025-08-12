@@ -10,9 +10,6 @@ RUN apt-get update && apt-get install -y openssh-client \
     netcat-traditional \
     iputils-ping
 
-RUN npm config set prefix /home/node/.npm-global
-ENV PATH=/home/node/.npm-global/bin:$PATH
-
 # Create SSH directory
 RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh
 # Create SSH key files with correct permissions (to be mounted at runtime)
