@@ -1,0 +1,47 @@
+services:
+  vibecoder:
+    build:
+      context: .
+      dockerfile: Dockerfile.vibecoder
+    networks:
+      - llm-sandbox
+    tty: true
+    stdin_open: true
+    # depends on qwen and grok
+    depends_on:
+      - qwen
+      - grok
+      - gemini
+      - claude
+
+  qwen:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    networks:
+      - llm-sandbox
+
+  grok:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    networks:
+      - llm-sandbox
+
+  gemini:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    networks:
+      - llm-sandbox
+
+  claude:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    networks:
+      - llm-sandbox
+
+networks:
+  llm-sandbox:
+    driver: bridge
