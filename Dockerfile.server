@@ -10,13 +10,12 @@ RUN apt-get update && apt-get install -y openssh-server \
     iputils-ping
 
 RUN npm config set prefix /root/.npm-global
-ENV PATH=/root/.npm-global/bin:$PATH
 RUN npm install -g @qwen-code/qwen-code@latest @vibe-kit/grok-cli@latest @google/gemini-cli@latest @anthropic-ai/claude-code@latest
+RUN echo "PATH=/root/.npm-global/bin:$PATH" >> /root/.bashrc
 
 RUN mkdir /var/run/sshd
-RUN echo 'root:password' | chpasswd
-RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN sed -i 's/#PasswordAuthentication no/PasswordAuthentication no/' /etc/ssh/sshd_config
+# ssh terminals don't pass envs properly
+COPY .env /root/.env
 
 # Copy authorized_keys file (to be mounted at runtime)
 COPY authorized_keys /root/.ssh/authorized_keys

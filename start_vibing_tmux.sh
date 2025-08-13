@@ -17,7 +17,7 @@ for i in "${!servers[@]}"; do
   window_num=$((i + 1))
   server=${servers[$i]}
   tmux new-window -t vibing:$window_num -n "$server"
-  tmux send-keys -t vibing:$window_num "ssh -p 22 $server -t \"echo \\\"hey I'm server: $server\\\"; exec \\\$SHELL\"" C-m
+  tmux send-keys -t vibing:$window_num "ssh -p 22 $server -t \"set -a && source .env && set +a; echo -e \\\"\n \n - - - - - \n hey I'm server: $server\\\"; exec \\\$SHELL\"" C-m
 done
 
 # Select the first window
